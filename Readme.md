@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Sergey Lysenko](https://up.htmlacademy.ru/javascript/19/user/495903).
-* Наставник: `Неизвестно`.
+* Наставник: `Дмитрий (sench) Железцов`.
 
 ---
 
