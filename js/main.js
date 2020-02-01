@@ -151,11 +151,16 @@ var createCard = function (adsArrey) {
 
   var createCardFeatures = function (featuresArrey, featuresDom, featuresNode) {
     if (featuresArrey) {
-      for (var t = 0; t < featuresDom.length; t++) {
-        if (featuresDom.item(t).classList.contains('popup__feature--' + featuresArrey[t])) {
-          featuresDom.item(t).textContent = featuresArrey[t];
-        } else {
-          featuresDom.item(t).remove();
+      console.log(featuresArrey);
+      for (var s = 0; s < featuresDom.length; s++) {
+        for (var t = 0; t < featuresArrey.length; t++) {
+          if (featuresDom.item(s).classList.contains('popup__feature--' + featuresArrey[t])) {
+            featuresDom.item(s).textContent = featuresArrey[t];
+          }
+        }
+        console.log(featuresDom.item(s).textContent);
+        if (!featuresDom.item(s).textContent) {
+          featuresDom.item(s).remove();
         }
       }
     } else {
