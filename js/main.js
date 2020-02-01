@@ -103,20 +103,11 @@ var createCard = function (adsArrey) {
   var popupPhotoNode = card.querySelector('.popup__photos');
   var popupPhotoElem = card.querySelector('.popup__photo');
 
-  var createCardElementText = function (arreyElem, domElem, text) {
+  var createCardElement = function (arreyElem, domElem, method, text) {
     if (arreyElem && text) {
-      domElem.textContent = arreyElem + text;
+      domElem[method] = arreyElem + text;
     } else if (arreyElem && !text) {
-      domElem.textContent = arreyElem;
-    } else {
-      domElem.hidden = true;
-    }
-    return domElem;
-  };
-
-  var createCardElementSrc = function (arreyElem, domElem) {
-    if (arreyElem) {
-      domElem.src = arreyElem;
+      domElem[method] = arreyElem;
     } else {
       domElem.hidden = true;
     }
@@ -158,7 +149,7 @@ var createCard = function (adsArrey) {
     return timeText;
   };
 
-  var getFeaturesList = function (featuresArrey, featuresDom, featuresNode) {
+  var createCardFeatures = function (featuresArrey, featuresDom, featuresNode) {
     if (featuresArrey) {
       for (var t = 0; t < featuresDom.length; t++) {
         if (featuresDom.item(t).classList.contains('popup__feature--' + featuresArrey[t])) {
@@ -173,7 +164,7 @@ var createCard = function (adsArrey) {
     return featuresDom;
   };
 
-  var createCardImg = function (imgArrey, domNode, domElem) {
+  var createCardImges = function (imgArrey, domNode, domElem) {
     if (imgArrey) {
       for (var j = 0; j < imgArrey.length; j++) {
         var cardImg = domElem.cloneNode(true);
@@ -186,16 +177,16 @@ var createCard = function (adsArrey) {
     domNode.removeChild(domElem);
   };
 
-  createCardElementText(adsArrey.offer.title, popupTitle);
-  createCardElementText(adsArrey.offer.address, popupAddress);
-  createCardElementText(adsArrey.offer.price, popupPrice, '₽/ночь');
-  createCardElementText(translateHouseType(adsArrey.offer.type), popupType);
-  createCardElementText(getRoomGuestText(adsArrey.offer.rooms, adsArrey.offer.guests), popupCapacity);
-  createCardElementText(getTimeText(adsArrey.offer.checkin, adsArrey.offer.checkout), popupTime);
-  getFeaturesList(adsArrey.offer.features, popupFeaturesList, popupFeaturesNode);
-  createCardElementText(adsArrey.offer.description, popupDescription);
-  createCardElementSrc(adsArrey.author.avatar, popupAvatar);
-  createCardImg(adsArrey.offer.photos, popupPhotoNode, popupPhotoElem);
+  createCardElement(adsArrey.offer.title, popupTitle, 'textContent');
+  createCardElement(adsArrey.offer.address, popupAddress, 'textContent');
+  createCardElement(adsArrey.offer.price, popupPrice, 'textContent', '₽/ночь');
+  createCardElement(translateHouseType(adsArrey.offer.type), popupType, 'textContent');
+  createCardElement(getRoomGuestText(adsArrey.offer.rooms, adsArrey.offer.guests), popupCapacity, 'textContent');
+  createCardElement(getTimeText(adsArrey.offer.checkin, adsArrey.offer.checkout), popupTime, 'textContent');
+  createCardFeatures(adsArrey.offer.features, popupFeaturesList, popupFeaturesNode);
+  createCardElement(adsArrey.offer.description, popupDescription, 'textContent');
+  createCardElement(adsArrey.author.avatar, popupAvatar, 'src');
+  createCardImges(adsArrey.offer.photos, popupPhotoNode, popupPhotoElem);
 
   return card;
 };
