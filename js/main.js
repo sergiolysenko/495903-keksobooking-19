@@ -200,7 +200,10 @@ var createCard = function (adsArrey) {
   return card;
 };
 
-
+var cardFragment = document.createDocumentFragment();
+for (var k = 0; k < ads.length; k++) {
+  cardFragment.appendChild(createCard(ads[k]));
+}
 var mapSection = document.querySelector('.map');
 var mapFilters = document.querySelector('.map__filters-container');
 mapSection.insertBefore(cardFragment, mapFilters);
