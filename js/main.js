@@ -199,16 +199,16 @@ var createCard = function (adsArray) {
   return card;
 };
 var mapSection = document.querySelector('.map');
-var mapFilters = document.querySelector('.map__filters-container');
+var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-var createCards = function(arr) {
+var createCards = function (arr) {
   var cardFragment = document.createDocumentFragment();
   for (var k = 0; k < arr.length; k++) {
     cardFragment.appendChild(createCard(arr[k]));
   }
-  mapSection.insertBefore(cardFragment, mapFilters);
+  mapSection.insertBefore(cardFragment, mapFiltersContainer);
 };
-  createCards(ads);
+createCards(ads);
 
 
 // Отключение страницы до активации
@@ -240,7 +240,7 @@ disableElem(adFormInputsSelects);
 var deleteClassHidden = function (elem) {
   elem.forEach(function (item) {
     item.classList.remove('hidden');
-  })
+  });
 };
 
 var activatePage = function () {
@@ -323,52 +323,52 @@ var roomsNumbers = {
   TWO: '2',
   THREE: '3',
   ONE_HUNDRED: '100'
-}
+};
 var capacitySelected = {
   ONE: '1',
   TWO: '2',
   THREE: '3',
   NONE: '0'
-}
+};
 var capacityOption = {
   THREE: capacityOptions[0],
   TWO: capacityOptions[1],
   ONE: capacityOptions[2],
   NONE: capacityOptions[3]
-}
+};
 capacityOption.THREE.disabled = true;
 capacityOption.TWO.disabled = true;
 capacityOption.NONE.disabled = true;
 
 var roomChange = function () {
   switch (true) {
-  case (roomNumberSelect.value === roomsNumbers.ONE):
-    capacity.value = capacitySelected.ONE;
-    capacityOption.THREE.disabled = true;
-    capacityOption.TWO.disabled = true;
-    capacityOption.ONE.disabled = false;
-    capacityOption.NONE.disabled = true;
-    break;
-  case (roomNumberSelect.value === roomsNumbers.TWO):
-    capacity.value = capacitySelected.TWO;
-    capacityOption.THREE.disabled = true;
-    capacityOption.TWO.disabled = false;
-    capacityOption.ONE.disabled = false;
-    capacityOption.NONE.disabled = true;
-    break;
-  case (roomNumberSelect.value === roomsNumbers.THREE):
-    capacity.value = capacitySelected.THREE;
-    capacityOption.THREE.disabled = false;
-    capacityOption.TWO.disabled = false;
-    capacityOption.ONE.disabled = false;
-    capacityOption.NONE.disabled = true;
-    break;
-  default:
-    capacity.value = capacitySelected.NONE;
-    capacityOption.THREE.disabled = true;
-    capacityOption.TWO.disabled = true;
-    capacityOption.ONE.disabled = true;
-    capacityOption.NONE.disabled = false;
+    case (roomNumberSelect.value === roomsNumbers.ONE):
+      capacity.value = capacitySelected.ONE;
+      capacityOption.THREE.disabled = true;
+      capacityOption.TWO.disabled = true;
+      capacityOption.ONE.disabled = false;
+      capacityOption.NONE.disabled = true;
+      break;
+    case (roomNumberSelect.value === roomsNumbers.TWO):
+      capacity.value = capacitySelected.TWO;
+      capacityOption.THREE.disabled = true;
+      capacityOption.TWO.disabled = false;
+      capacityOption.ONE.disabled = false;
+      capacityOption.NONE.disabled = true;
+      break;
+    case (roomNumberSelect.value === roomsNumbers.THREE):
+      capacity.value = capacitySelected.THREE;
+      capacityOption.THREE.disabled = false;
+      capacityOption.TWO.disabled = false;
+      capacityOption.ONE.disabled = false;
+      capacityOption.NONE.disabled = true;
+      break;
+    default:
+      capacity.value = capacitySelected.NONE;
+      capacityOption.THREE.disabled = true;
+      capacityOption.TWO.disabled = true;
+      capacityOption.ONE.disabled = true;
+      capacityOption.NONE.disabled = false;
   }
 };
 
@@ -383,7 +383,7 @@ var timeIn = function () {
   timeout.value = timein.value;
 };
 var timeOut = function () {
- timein.value = timeout.value;
+  timein.value = timeout.value;
 };
 
 timein.addEventListener('change', timeIn);
@@ -391,13 +391,13 @@ timeout.addEventListener('change', timeOut);
 
 // Скрытие и показ карточек по клику по пинам
 
-var cardsCollection = document.querySelectorAll('.popup');
+/* var cardsCollection = document.querySelectorAll('.popup');
 var popUpCloseCollection = document.querySelectorAll('.popup__close');
 
 var addHiddenForEach = function (elem) {
-  elem.forEach(function(item) {
+  elem.forEach(function (item) {
     item.classList.add('hidden');
-  })
+  });
 };
 
 var addOnPinClick = function (pin, card, cards) {
@@ -405,7 +405,7 @@ var addOnPinClick = function (pin, card, cards) {
     addHiddenForEach(cards);
     card.classList.remove('hidden');
     pin.removeEventListener('click', openPin);
-  }
+  };
   pin.addEventListener('click', openPin);
 };
 
@@ -424,3 +424,4 @@ var addEvtListeners = function () {
 }
 addEvtListeners();
 
+*/
