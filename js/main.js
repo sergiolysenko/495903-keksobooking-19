@@ -73,6 +73,7 @@ var createPin = function (adsArray) {
   var pinImg = mapPin.querySelector('img');
   pinImg.src = adsArray.author.avatar;
   pinImg.alt = adsArray.offer.title;
+  mapPin.classList.add('hidden');
 
   return mapPin;
 };
@@ -84,8 +85,8 @@ var createPins = function (arr, domElem) {
   }
   return domElem.appendChild(fragment);
 };
-
-/* Заполнение карточки ---------------------------------
+createPins(ads, mapPins);
+// Заполнение карточки ---------------------------------
 var cardTemplate = document.querySelector('#card')
     .content.querySelector('.map__card');
 
@@ -193,6 +194,8 @@ var createCard = function (adsArray) {
   createCardElement(adsArray.author.avatar, popupAvatar, 'src');
   createCardImges(adsArray.offer.photos, popupPhotoNode, popupPhotoElem);
 
+  card.classList.add('hidden');
+
   return card;
 };
 var mapSection = document.querySelector('.map');
@@ -206,7 +209,7 @@ var createCards = function(arr) {
   mapSection.insertBefore(cardFragment, mapFilters);
 };
   createCards(ads);
-*/
+
 
 // Отключение страницы до активации
 // Блокиировка input and select в .ad-form и .map__filters
@@ -217,6 +220,7 @@ var mapFilters = map.querySelector('.map__filters');
 var mapInputsSelects = mapFilters.querySelectorAll('input, select');
 var mainPin = map.querySelector('.map__pin--main');
 var adressInput = document.getElementById('address');
+var pinsCollection = document.querySelectorAll('.map__pin--main ~ .map__pin');
 
 var disableElem = function (elem) {
   elem.forEach(function (item) {
@@ -233,25 +237,30 @@ disableElem(mapInputsSelects);
 disableElem(adFormInputsSelects);
 
 //  Активация страницы
+var deleteClassHidden = function (elem) {
+  elem.forEach(function (item) {
+    item.classList.remove('hidden');
+  })
+};
 
 var activatePage = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
   enableElem(adFormInputsSelects);
   enableElem(mapInputsSelects);
-  createPins(ads, mapPins);
+  deleteClassHidden(pinsCollection);
   adressInputFill(mainPin.style.left, mainPin.style.top);
   adressInput.disabled = true;
 };
 
-var onPinClick = function (evt) {
+var onBigPinClick = function (evt) {
   if (evt.which === 1) {
     activatePage();
-    mainPin.removeEventListener('mousedown', onPinClick);
+    mainPin.removeEventListener('mousedown', onBigPinClick);
   }
 };
 
-mainPin.addEventListener('mousedown', onPinClick);
+mainPin.addEventListener('mousedown', onBigPinClick);
 mainPin.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     activatePage();
@@ -282,59 +291,136 @@ priceInput.placeholder = FLAT_PRICE;
 priceInput.min = FLAT_PRICE;
 
 var houseTypeChange = function () {
-  if (houseType.value === 'bungalo') {
-    priceInput.placeholder = BUNGALO_PRICE;
-    priceInput.min = BUNGALO_PRICE;
-  } else if (houseType.value === 'flat') {
-    priceInput.placeholder = FLAT_PRICE;
-    priceInput.min = FLAT_PRICE;
-  } else if (houseType.value === 'house') {
-    priceInput.placeholder = HOUSE_PRICE;
-    priceInput.min = HOUSE_PRICE;
-  } else if (houseType.value === 'palace') {
-    priceInput.placeholder = PALACE_PRICE;
-    priceInput.min = PALACE_PRICE;
+  switch (true) {
+    case houseType.value === 'bungalo':
+      priceInput.placeholder = BUNGALO_PRICE;
+      priceInput.min = BUNGALO_PRICE;
+      break;
+    case (houseType.value === 'flat'):
+      priceInput.placeholder = FLAT_PRICE;
+      priceInput.min = FLAT_PRICE;
+      break;
+    case (houseType.value === 'house'):
+      priceInput.placeholder = HOUSE_PRICE;
+      priceInput.min = HOUSE_PRICE;
+      break;
+    case (houseType.value === 'palace'):
+      priceInput.placeholder = PALACE_PRICE;
+      priceInput.min = PALACE_PRICE;
+      break;
   }
 };
-
-houseType.onchange = houseTypeChange;
+houseType.addEventListener('change', houseTypeChange);
 
 //  Валидация форм количество комнат и вместимость
 
-var roomNumber = document.getElementById('room_number');
+var roomNumberSelect = document.getElementById('room_number');
 var capacity = document.getElementById('capacity');
 var capacityOptions = capacity.querySelectorAll('option');
 
-capacityOptions[0].disabled = true;
-capacityOptions[1].disabled = true;
-capacityOptions[3].disabled = true;
+var roomsNumbers = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  ONE_HUNDRED: '100'
+}
+var capacitySelected = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  NONE: '0'
+}
+var capacityOption = {
+  THREE: capacityOptions[0],
+  TWO: capacityOptions[1],
+  ONE: capacityOptions[2],
+  NONE: capacityOptions[3]
+}
+capacityOption.THREE.disabled = true;
+capacityOption.TWO.disabled = true;
+capacityOption.NONE.disabled = true;
 
 var roomChange = function () {
-  if (roomNumber.value === '1') {
-    capacity.value = '1';
-    capacityOptions[0].disabled = true;
-    capacityOptions[1].disabled = true;
-    capacityOptions[2].disabled = false;
-    capacityOptions[3].disabled = true;
-  } else if (roomNumber.value === '2') {
-    capacity.value = '2';
-    capacityOptions[0].disabled = true;
-    capacityOptions[1].disabled = false;
-    capacityOptions[2].disabled = false;
-    capacityOptions[3].disabled = true;
-  } else if (roomNumber.value === '3') {
-    capacity.value = '3';
-    capacityOptions[0].disabled = false;
-    capacityOptions[1].disabled = false;
-    capacityOptions[2].disabled = false;
-    capacityOptions[3].disabled = true;
-  } else {
-    capacity.value = '0';
-    capacityOptions[0].disabled = true;
-    capacityOptions[1].disabled = true;
-    capacityOptions[2].disabled = true;
-    capacityOptions[3].disabled = false;
+  switch (true) {
+  case (roomNumberSelect.value === roomsNumbers.ONE):
+    capacity.value = capacitySelected.ONE;
+    capacityOption.THREE.disabled = true;
+    capacityOption.TWO.disabled = true;
+    capacityOption.ONE.disabled = false;
+    capacityOption.NONE.disabled = true;
+    break;
+  case (roomNumberSelect.value === roomsNumbers.TWO):
+    capacity.value = capacitySelected.TWO;
+    capacityOption.THREE.disabled = true;
+    capacityOption.TWO.disabled = false;
+    capacityOption.ONE.disabled = false;
+    capacityOption.NONE.disabled = true;
+    break;
+  case (roomNumberSelect.value === roomsNumbers.THREE):
+    capacity.value = capacitySelected.THREE;
+    capacityOption.THREE.disabled = false;
+    capacityOption.TWO.disabled = false;
+    capacityOption.ONE.disabled = false;
+    capacityOption.NONE.disabled = true;
+    break;
+  default:
+    capacity.value = capacitySelected.NONE;
+    capacityOption.THREE.disabled = true;
+    capacityOption.TWO.disabled = true;
+    capacityOption.ONE.disabled = true;
+    capacityOption.NONE.disabled = false;
   }
 };
 
-roomNumber.onchange = roomChange;
+roomNumberSelect.addEventListener('change', roomChange);
+
+// время заезда и вермя выезда
+
+var timein = document.getElementById('timein');
+var timeout = document.getElementById('timeout');
+
+var timeIn = function () {
+  timeout.value = timein.value;
+};
+var timeOut = function () {
+ timein.value = timeout.value;
+};
+
+timein.addEventListener('change', timeIn);
+timeout.addEventListener('change', timeOut);
+
+// Скрытие и показ карточек по клику по пинам
+
+var cardsCollection = document.querySelectorAll('.popup');
+var popUpCloseCollection = document.querySelectorAll('.popup__close');
+
+var addHiddenForEach = function (elem) {
+  elem.forEach(function(item) {
+    item.classList.add('hidden');
+  })
+};
+
+var addOnPinClick = function (pin, card, cards) {
+  var openPin = function () {
+    addHiddenForEach(cards);
+    card.classList.remove('hidden');
+    pin.removeEventListener('click', openPin);
+  }
+  pin.addEventListener('click', openPin);
+};
+
+var addCloseCards = function (close, card, pin) {
+  var closeCard = function () {
+    card.classList.add('hidden');
+    card.removeEventListener('click', closeCard);
+  }
+  close.addEventListener('click', closeCard);
+}
+var addEvtListeners = function () {
+  for (var q = 0; q < pinsCollection.length; q++) {
+    addOnPinClick(pinsCollection[q], cardsCollection[q], cardsCollection);
+    addCloseCards(popUpCloseCollection[q], cardsCollection[q]);
+  }
+}
+addEvtListeners();
+
