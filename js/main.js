@@ -391,7 +391,7 @@ timeout.addEventListener('change', timeOut);
 
 // Скрытие и показ карточек по клику по пинам
 
-/* var cardsCollection = document.querySelectorAll('.popup');
+var cardsCollection = document.querySelectorAll('.popup');
 var popUpCloseCollection = document.querySelectorAll('.popup__close');
 
 var addHiddenForEach = function (elem) {
@@ -400,28 +400,44 @@ var addHiddenForEach = function (elem) {
   });
 };
 
-var addOnPinClick = function (pin, card, cards) {
+var addOnPinClick = function (pin, card, cards, closeButton) {
   var openPin = function () {
     addHiddenForEach(cards);
     card.classList.remove('hidden');
     pin.removeEventListener('click', openPin);
+    pin.removeEventListener('click', onPinEnterOpen);
+    var addCloseCard = function () {
+      var onCardEscPress = function (evt) {
+        if (evt.key === 'Escape') {
+          card.classList.add('hidden');
+          document.removeEventListener('keydown', onCardEscPress);
+          pin.addEventListener('click', openPin);
+          pin.addEventListener('keydown', onPinEnterOpen);
+        }
+      };
+      document.addEventListener('keydown', onCardEscPress);
+      var closeCard = function () {
+        card.classList.add('hidden');
+        card.removeEventListener('click', closeCard);
+        pin.addEventListener('click', openPin);
+      };
+      closeButton.addEventListener('click', closeCard);
+    };
+    addCloseCard(card, closeButton);
   };
+  var onPinEnterOpen = function (evt) {
+    if (evt.key === 'Enter') {
+      openPin();
+    }
+  };
+  pin.addEventListener('keydown', onPinEnterOpen);
   pin.addEventListener('click', openPin);
 };
 
-var addCloseCards = function (close, card, pin) {
-  var closeCard = function () {
-    card.classList.add('hidden');
-    card.removeEventListener('click', closeCard);
-  }
-  close.addEventListener('click', closeCard);
-}
-var addEvtListeners = function () {
+var addEvtListenersOpen = function () {
   for (var q = 0; q < pinsCollection.length; q++) {
-    addOnPinClick(pinsCollection[q], cardsCollection[q], cardsCollection);
-    addCloseCards(popUpCloseCollection[q], cardsCollection[q]);
+    addOnPinClick(pinsCollection[q], cardsCollection[q], cardsCollection, popUpCloseCollection[q]);
   }
-}
-addEvtListeners();
+};
 
-*/
+addEvtListenersOpen();
