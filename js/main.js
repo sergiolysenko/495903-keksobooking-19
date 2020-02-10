@@ -406,6 +406,8 @@ var addOnPinClick = function (pin, adElem) {
     var activePin = document.querySelector('.map__pin--active');
     activePin.classList.remove('map__pin--active');
     document.removeEventListener('keydown', onCardEscPress);
+    var cardClose = document.querySelector('.popup__close');
+    cardClose.removeEventListener('click', deleteCard);
     var card = document.querySelector('.popup');
     card.remove();
   };
