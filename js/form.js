@@ -9,7 +9,7 @@
   var houseType = document.getElementById('type');
   var priceInput = document.getElementById('price');
   var map = document.querySelector('.map');
-  var mainPin = map.querySelector('.map__pin--main');
+
   var addressInput = document.getElementById('address');
 
   priceInput.placeholder = FLAT_PRICE;
@@ -117,8 +117,7 @@
       addressInput.value = Math.round((parseInt(x, 10) + PIN_SMALL_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_SMALL_SIZE));
     }
   };
-  addressInputFill(mainPin.style.left, mainPin.style.top);
-
+  addressInputFill(window.pin.main.style.left, window.pin.main.style.top);
   window.form = {
     addressInputFill: addressInputFill
   };
