@@ -6,7 +6,7 @@
   var mapFilters = document.querySelector('.map__filters');
   var mapInputsSelects = mapFilters.querySelectorAll('input, select');
   var mainPin = document.querySelector('.map__pin--main');
-  var adressInput = document.getElementById('address');
+  var addressInput = document.getElementById('address');
 
   window.util.disableElem(mapInputsSelects);
   window.util.disableElem(adFormInputsSelects);
@@ -17,8 +17,8 @@
     window.util.enableElem(adFormInputsSelects);
     window.util.enableElem(mapInputsSelects);
     window.util.deleteClassHidden(window.pin.collection);
-    window.form.adressInputFill(mainPin.style.left, mainPin.style.top);
-    adressInput.disabled = true;
+    window.form.addressInputFill(mainPin.style.left, mainPin.style.top);
+    addressInput.disabled = true;
   };
 
   var onBigPinClick = function (evt) {

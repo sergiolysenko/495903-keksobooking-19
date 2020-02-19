@@ -9,8 +9,8 @@
   var houseType = document.getElementById('type');
   var priceInput = document.getElementById('price');
   var map = document.querySelector('.map');
-  var mainPin = map.querySelector('.map__pin--main');
-  var adressInput = document.getElementById('address');
+
+  var addressInput = document.getElementById('address');
 
   priceInput.placeholder = FLAT_PRICE;
   priceInput.min = FLAT_PRICE;
@@ -110,17 +110,16 @@
   timein.addEventListener('change', timeIn);
   timeout.addEventListener('change', timeOut);
 
-  var adressInputFill = function (x, y) {
+  var addressInputFill = function (x, y) {
     if (map.classList.contains('map--faded')) {
-      adressInput.value = Math.round((parseInt(x, 10) + PIN_BIG_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_BIG_SIZE / 2));
+      addressInput.value = Math.round((parseInt(x, 10) + PIN_BIG_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_BIG_SIZE / 2));
     } else {
-      adressInput.value = Math.round((parseInt(x, 10) + PIN_SMALL_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_SMALL_SIZE));
+      addressInput.value = Math.round((parseInt(x, 10) + PIN_SMALL_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_SMALL_SIZE));
     }
   };
-  adressInputFill(mainPin.style.left, mainPin.style.top);
-
+  addressInputFill(window.pin.main.style.left, window.pin.main.style.top);
   window.form = {
-    adressInputFill: adressInputFill
+    addressInputFill: addressInputFill
   };
 
 })();
