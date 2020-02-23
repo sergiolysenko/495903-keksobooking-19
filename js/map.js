@@ -54,5 +54,5 @@
   window.map = {
     map: map,
     addOnPinClick: addOnPinClick
-  }
+  };
 })();
