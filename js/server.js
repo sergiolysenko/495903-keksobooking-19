@@ -2,7 +2,8 @@
 'use strict';
 
 (function () {
-  var URL = 'https://js.dump.academy/keksobooking/data';
+  var URL_DOWNLOAD = 'https://js.dump.academy/keksobooking/data';
+  /*  var URL_UPLOAD = 'https://js.dump.academy/keksobooking';*/
   var StatusCode = {
     OK: 200
   };
@@ -11,7 +12,7 @@
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open('GET', URL);
+    xhr.open('GET', URL_DOWNLOAD);
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
         onSuccess(xhr.response);
@@ -30,15 +31,9 @@
     xhr.send();
   };
 
-  var onError = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-  window.load(window.activatePage, onError);
+  /*  window.upload = function (data, onSuccess) {
+
+  };*/
+
+
 })();
