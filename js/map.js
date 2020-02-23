@@ -51,11 +51,8 @@
     pin.addEventListener('click', openPin);
   };
 
-  (function () {
-    for (var q = 0; q < window.pin.collection.length; q++) {
-      addOnPinClick(window.pin.collection[q], window.data.ads[q]);
-    }
-  })();
-  window.map = map;
-
+  window.map = {
+    map: map,
+    addOnPinClick: addOnPinClick
+  };
 })();

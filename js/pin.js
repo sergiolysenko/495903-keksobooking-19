@@ -10,25 +10,24 @@
   var mapPins = document.querySelector('.map__pins');
   var mainPin = document.querySelector('.map__pin--main');
 
-  var createPin = function (adsArray) {
+  var createPin = function (arr) {
     var mapPin = mapPinTemplate.cloneNode(true);
-    mapPin.style = 'left:' + (adsArray.location.x - PIN_WIDTH) + 'px; top:' + adsArray.location.y + 'px;';
+    mapPin.style = 'left:' + (arr.location.x - PIN_WIDTH) + 'px; top:' + arr.location.y + 'px;';
     var pinImg = mapPin.querySelector('img');
-    pinImg.src = adsArray.author.avatar;
-    pinImg.alt = adsArray.offer.title;
+    pinImg.src = arr.author.avatar;
+    pinImg.alt = arr.offer.title;
     mapPin.classList.add('hidden');
 
     return mapPin;
   };
 
-  var createPins = function (arr, domElem) {
+  var createPins = function (arr) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < arr.length; i++) {
       fragment.appendChild(createPin(arr[i]));
     }
-    return domElem.appendChild(fragment);
+    mapPins.appendChild(fragment);
   };
-  createPins(window.data.ads, mapPins);
 
   mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -62,7 +61,7 @@
         mainPin.style.left = MAX_RIGHT - MOVE_FROM_MAX + 'px';
       }
       if (mainPin.offsetLeft < 0) {
-        mainPin.style.left = 0 + MOVE_FROM_MAX + 'px';
+        mainPin.style.left = MOVE_FROM_MAX + 'px';
       }
 
       window.form.addressInputFill(mainPin.style.left, mainPin.style.top);
@@ -79,8 +78,9 @@
   });
 
   window.pin = {
-    collection: document.querySelectorAll('.map__pin--main ~ .map__pin'),
-    main: mainPin
+    main: mainPin,
+    mapPins: mapPins,
+    create: createPins
   };
 
 })();

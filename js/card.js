@@ -83,7 +83,7 @@
       return featuresDom;
     };
 
-    var createCardImges = function (imgArray, domNode, domElem) {
+    var createCardImages = function (imgArray, domNode, domElem) {
       if (imgArray) {
         for (var j = 0; j < imgArray.length; j++) {
           var cardImg = domElem.cloneNode(true);
@@ -105,10 +105,11 @@
     createCardFeatures(adsArray.offer.features, popupFeaturesList, popupFeaturesNode);
     createCardElement(adsArray.offer.description, popupDescription, 'textContent');
     createCardElement(adsArray.author.avatar, popupAvatar, 'src');
-    createCardImges(adsArray.offer.photos, popupPhotoNode, popupPhotoElem);
+    createCardImages(adsArray.offer.photos, popupPhotoNode, popupPhotoElem);
 
     return card;
   };
+
   window.card = {
     create: createCard
   };

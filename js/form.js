@@ -16,20 +16,20 @@
   priceInput.min = FLAT_PRICE;
 
   var houseTypeChange = function () {
-    switch (true) {
-      case houseType.value === 'bungalo':
+    switch (houseType.value) {
+      case 'bungalo':
         priceInput.placeholder = BUNGALO_PRICE;
         priceInput.min = BUNGALO_PRICE;
         break;
-      case (houseType.value === 'flat'):
+      case 'flat':
         priceInput.placeholder = FLAT_PRICE;
         priceInput.min = FLAT_PRICE;
         break;
-      case (houseType.value === 'house'):
+      case 'house':
         priceInput.placeholder = HOUSE_PRICE;
         priceInput.min = HOUSE_PRICE;
         break;
-      case (houseType.value === 'palace'):
+      case 'palace':
         priceInput.placeholder = PALACE_PRICE;
         priceInput.min = PALACE_PRICE;
         break;
@@ -64,34 +64,40 @@
   capacityOption.NONE.disabled = true;
 
   var roomChange = function () {
-    switch (true) {
-      case (roomNumberSelect.value === roomsNumbers.ONE):
+    switch (roomNumberSelect.value) {
+      case roomsNumbers.ONE:
         capacity.value = capacitySelected.ONE;
         capacityOption.THREE.disabled = true;
         capacityOption.TWO.disabled = true;
         capacityOption.ONE.disabled = false;
         capacityOption.NONE.disabled = true;
         break;
-      case (roomNumberSelect.value === roomsNumbers.TWO):
+      case roomsNumbers.TWO:
         capacity.value = capacitySelected.TWO;
         capacityOption.THREE.disabled = true;
         capacityOption.TWO.disabled = false;
         capacityOption.ONE.disabled = false;
         capacityOption.NONE.disabled = true;
         break;
-      case (roomNumberSelect.value === roomsNumbers.THREE):
+      case roomsNumbers.THREE:
         capacity.value = capacitySelected.THREE;
         capacityOption.THREE.disabled = false;
         capacityOption.TWO.disabled = false;
         capacityOption.ONE.disabled = false;
         capacityOption.NONE.disabled = true;
         break;
-      default:
+      case roomsNumbers.ONE_HUNDRED:
         capacity.value = capacitySelected.NONE;
         capacityOption.THREE.disabled = true;
         capacityOption.TWO.disabled = true;
         capacityOption.ONE.disabled = true;
         capacityOption.NONE.disabled = false;
+        break;
+      default:
+        capacityOption.THREE.disabled = false;
+        capacityOption.TWO.disabled = false;
+        capacityOption.ONE.disabled = false;
+        capacityOption.NONE.disabled = true;
     }
   };
 
