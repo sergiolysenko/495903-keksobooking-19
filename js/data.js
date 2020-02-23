@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 (function () {
 
   var AD_QUANTITY = 8;
@@ -48,4 +48,6 @@
   window.data = {
     ads: ads
   };
+
 })();
+*/
