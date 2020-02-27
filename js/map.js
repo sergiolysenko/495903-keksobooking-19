@@ -1,10 +1,13 @@
 'use strict';
 (function () {
-  var mapFiltersContainer = document.querySelector('.map__filters-container');
+  var filtersContainer = document.querySelector('.map__filters-container');
   var map = document.querySelector('.map');
+  var mainPin = document.querySelector('.map__pin--main');
+  var filterCheckboxes = document.querySelectorAll('.map__checkbox');
+  var filterSelects = document.querySelectorAll('.map__filter');
 
   var addCardToDom = function (arr) {
-    map.insertBefore(window.card.create(arr), mapFiltersContainer);
+    map.insertBefore(window.card.create(arr), filtersContainer);
   };
 
   var addOnPinClick = function (pin, adElem) {
@@ -12,33 +15,14 @@
       var createOpenedCard = function () {
         addCardToDom(adElem);
         pin.classList.add('map__pin--active');
-        addCloseCard();
+        window.card.addClose();
       };
       if (!document.querySelector('.map__pin--active')) {
         createOpenedCard();
       } else {
-        deleteCard();
-        document.removeEventListener('keydown', onCardEscPress);
+        window.card.delete();
+        document.removeEventListener('keydown', window.card.onCardEscPress);
         createOpenedCard();
-      }
-    };
-    var addCloseCard = function () {
-      document.addEventListener('keydown', onCardEscPress);
-      var cardClose = document.querySelector('.popup__close');
-      cardClose.addEventListener('click', deleteCard);
-    };
-    var deleteCard = function () {
-      var activePin = document.querySelector('.map__pin--active');
-      activePin.classList.remove('map__pin--active');
-      document.removeEventListener('keydown', onCardEscPress);
-      var cardClose = document.querySelector('.popup__close');
-      cardClose.removeEventListener('click', deleteCard);
-      var card = document.querySelector('.popup');
-      card.remove();
-    };
-    var onCardEscPress = function (evt) {
-      if (evt.key === 'Escape' && document.querySelector('.map__pin--active')) {
-        deleteCard();
       }
     };
     var onPinEnterOpen = function (evt) {
@@ -52,7 +36,10 @@
   };
 
   window.map = {
-    map: map,
-    addOnPinClick: addOnPinClick
+    mainBlock: map,
+    addOnPinClick: addOnPinClick,
+    mainPin: mainPin,
+    filterCheckboxes: filterCheckboxes,
+    filterSelects: filterSelects
   };
 })();

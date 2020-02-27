@@ -109,8 +109,31 @@
 
     return card;
   };
+  var onCardEscPress = function (evt) {
+    if (evt.key === 'Escape') {
+      deleteCard();
+    }
+  };
+  var addClose = function () {
+    var cardClose = document.querySelector('.popup__close');
+    document.addEventListener('keydown', onCardEscPress);
+    cardClose.addEventListener('click', deleteCard);
+  };
+  var deleteCard = function () {
+    var activePin = document.querySelector('.map__pin--active');
+    var cardClose = document.querySelector('.popup__close');
+    var card = document.querySelector('.popup');
+    activePin.classList.remove('map__pin--active');
+    document.removeEventListener('keydown', onCardEscPress);
+    cardClose.removeEventListener('click', deleteCard);
+    card.remove();
+  };
 
   window.card = {
-    create: createCard
+    create: createCard,
+    delete: deleteCard,
+    onCardEscPress: onCardEscPress,
+    addClose: addClose
+
   };
 })();
