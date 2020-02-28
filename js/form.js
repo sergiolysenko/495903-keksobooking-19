@@ -8,12 +8,22 @@
   var PALACE_PRICE = '10000';
   var houseType = document.getElementById('type');
   var priceInput = document.getElementById('price');
-  var map = document.querySelector('.map');
-
+  var adForm = document.querySelector('.ad-form');
   var addressInput = document.getElementById('address');
+  var title = document.querySelector('#title');
+  var description = document.querySelector('#description');
+  var featureCheckboxes = document.querySelectorAll('.feature__checkbox');
+  var timein = document.getElementById('timein');
+  var timeout = document.getElementById('timeout');
+  var roomNumberSelect = document.getElementById('room_number');
+  var capacity = document.getElementById('capacity');
+  var capacityOptions = capacity.querySelectorAll('option');
 
-  priceInput.placeholder = FLAT_PRICE;
-  priceInput.min = FLAT_PRICE;
+  var setPriceDefault = function () {
+    priceInput.placeholder = FLAT_PRICE;
+    priceInput.min = FLAT_PRICE;
+  };
+  setPriceDefault();
 
   var houseTypeChange = function () {
     switch (houseType.value) {
@@ -37,10 +47,6 @@
   };
   houseType.addEventListener('change', houseTypeChange);
 
-  var roomNumberSelect = document.getElementById('room_number');
-  var capacity = document.getElementById('capacity');
-  var capacityOptions = capacity.querySelectorAll('option');
-
   var roomsNumbers = {
     ONE: '1',
     TWO: '2',
@@ -59,9 +65,13 @@
     ONE: capacityOptions[2],
     NONE: capacityOptions[3]
   };
-  capacityOption.THREE.disabled = true;
-  capacityOption.TWO.disabled = true;
-  capacityOption.NONE.disabled = true;
+  var setDefaultCapacity = function () {
+    window.util.defaultSelect(capacity, 2, 'one');
+    capacityOption.THREE.disabled = true;
+    capacityOption.TWO.disabled = true;
+    capacityOption.NONE.disabled = true;
+  };
+  setDefaultCapacity();
 
   var roomChange = function () {
     switch (roomNumberSelect.value) {
@@ -103,9 +113,6 @@
 
   roomNumberSelect.addEventListener('change', roomChange);
 
-  var timein = document.getElementById('timein');
-  var timeout = document.getElementById('timeout');
-
   var timeIn = function () {
     timeout.value = timein.value;
   };
@@ -117,15 +124,33 @@
   timeout.addEventListener('change', timeOut);
 
   var addressInputFill = function (x, y) {
-    if (map.classList.contains('map--faded')) {
+    if (window.map.mainBlock.classList.contains('map--faded')) {
       addressInput.value = Math.round((parseInt(x, 10) + PIN_BIG_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_BIG_SIZE / 2));
     } else {
       addressInput.value = Math.round((parseInt(x, 10) + PIN_SMALL_SIZE / 2)) + ' ' + Math.round((parseInt(y, 10) + PIN_SMALL_SIZE));
     }
   };
-  addressInputFill(window.pin.main.style.left, window.pin.main.style.top);
-  window.form = {
-    addressInputFill: addressInputFill
-  };
 
+  addressInputFill(window.map.mainPin.style.left, window.map.mainPin.style.top);
+
+  adForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.upload(new FormData(adForm), window.onSendPopup.actionsIfSuccess, window.onSendPopup.actionsIfError);
+  });
+
+  window.form = {
+    addressInputFill: addressInputFill,
+    setPriceDefault: setPriceDefault,
+    adForm: adForm,
+    priceInput: priceInput,
+    title: title,
+    description: description,
+    featureCheckboxes: featureCheckboxes,
+    houseType: houseType,
+    timein: timein,
+    timeout: timeout,
+    capacity: capacity,
+    roomNumberSelect: roomNumberSelect,
+    setDefaultCapacity: setDefaultCapacity
+  };
 })();
