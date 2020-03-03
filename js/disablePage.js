@@ -14,8 +14,7 @@
       window.map.mainPin.style = 'left: 570px; top: 375px;';
       window.map.mainPin.addEventListener('mousedown', window.activatepage.onBigPinClick);
       window.map.mainPin.addEventListener('keydown', window.activatepage.onBigPinClick);
-      var pinCollection = document.querySelectorAll('.map__pin--main ~ .map__pin');
-      window.util.deleteElem(pinCollection);
+      window.util.deletePins();
       window.form.adForm.classList.add('ad-form--disabled');
       window.form.addressInputFill(window.map.mainPin.style.left, window.map.mainPin.style.top);
       window.util.defaultSelect(window.map.filterSelects, 0);

@@ -25,25 +25,16 @@
   };
   setPriceDefault();
 
+  var houseTypeToPrice = {
+    bungalo: BUNGALO_PRICE,
+    flat: FLAT_PRICE,
+    house: HOUSE_PRICE,
+    palace: PALACE_PRICE
+  };
+
   var houseTypeChange = function () {
-    switch (houseType.value) {
-      case 'bungalo':
-        priceInput.placeholder = BUNGALO_PRICE;
-        priceInput.min = BUNGALO_PRICE;
-        break;
-      case 'flat':
-        priceInput.placeholder = FLAT_PRICE;
-        priceInput.min = FLAT_PRICE;
-        break;
-      case 'house':
-        priceInput.placeholder = HOUSE_PRICE;
-        priceInput.min = HOUSE_PRICE;
-        break;
-      case 'palace':
-        priceInput.placeholder = PALACE_PRICE;
-        priceInput.min = PALACE_PRICE;
-        break;
-    }
+    priceInput.placeholder = houseTypeToPrice[houseType.value];
+    priceInput.min = houseTypeToPrice[houseType.value];
   };
   houseType.addEventListener('change', houseTypeChange);
 
@@ -135,7 +126,7 @@
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.upload(new FormData(adForm), window.onSendPopup.actionsIfSuccess, window.onSendPopup.actionsIfError);
+    window.backend.upload(new FormData(adForm), window.onSendPopup.actionsIfSuccess, window.onSendPopup.actionsIfError);
   });
 
   window.form = {
