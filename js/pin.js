@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var PINS_LIMIT = 5;
   var PIN_WIDTH = 40;
   var MAX_TOP = 130;
   var MAX_BOTTOM = 620;
@@ -15,14 +16,15 @@
     var pinImg = mapPin.querySelector('img');
     pinImg.src = arr.author.avatar;
     pinImg.alt = arr.offer.title;
-
+    window.map.addOnPinClick(mapPin, arr);
     return mapPin;
   };
 
-  var createPins = function (arr) {
+  var createPins = function (data) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < arr.length; i++) {
-      fragment.appendChild(createPin(arr[i]));
+    var takeNumber = data.length > PINS_LIMIT ? PINS_LIMIT : data.length;
+    for (var i = 0; i < takeNumber; i++) {
+      fragment.appendChild(createPin(data[i]));
     }
     mapPins.appendChild(fragment);
   };

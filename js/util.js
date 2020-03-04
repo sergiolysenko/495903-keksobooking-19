@@ -30,11 +30,13 @@
     });
   };
 
-  var deleteElem = function (elemArr) {
-    elemArr.forEach(function (item) {
+  var deletePins = function () {
+    var pinCollection = document.querySelectorAll('.map__pin--main ~ .map__pin');
+    pinCollection.forEach(function (item) {
       item.remove();
     });
   };
+
   var defaultSelect = function (elemArr, num, one) {
     if (!one) {
       elemArr.forEach(function (item) {
@@ -62,7 +64,7 @@
     disableElem: disableElem,
     enableElem: enableElem,
     deleteClassHidden: deleteClassHidden,
-    deleteElem: deleteElem,
+    deletePins: deletePins,
     defaultSelect: defaultSelect,
     defaultCheckbox: defaultCheckbox,
     clearInput: clearInput
