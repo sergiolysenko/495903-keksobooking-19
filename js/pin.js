@@ -24,6 +24,10 @@
     var fragment = document.createDocumentFragment();
     var takeNumber = data.length > PINS_LIMIT ? PINS_LIMIT : data.length;
     for (var i = 0; i < takeNumber; i++) {
+      if (!data[i].offer) {
+        takeNumber++;
+        continue;
+      }
       fragment.appendChild(createPin(data[i]));
     }
     mapPins.appendChild(fragment);
