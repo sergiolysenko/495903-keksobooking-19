@@ -22,7 +22,7 @@
   };
 
   var actionsIfSuccess = function () {
-    window.disablePage.disable();
+    window.disablePage.on();
     successBlock.cloneNode(true);
     main.appendChild(successBlock);
     window.addEventListener('keydown', closeBlock);

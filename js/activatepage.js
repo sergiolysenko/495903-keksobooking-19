@@ -8,7 +8,7 @@
     window.map.mainBlock.classList.remove('map--faded');
 
     window.avatar.makePreviewer(window.avatar.bookingChooser, window.avatar.makeNewImg());
-    window.form.adForm.classList.remove('ad-form--disabled');
+    window.form.ad.classList.remove('ad-form--disabled');
     window.util.enableElem(window.disablePage.disableElements);
     window.form.addressInputFill(window.map.mainPin.style.left, window.map.mainPin.style.top);
     addressInput.readOnly = true;

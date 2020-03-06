@@ -145,7 +145,7 @@
   window.form = {
     addressInputFill: addressInputFill,
     setPriceDefault: setPriceDefault,
-    adForm: adForm,
+    ad: adForm,
     priceInput: priceInput,
     title: title,
     description: description,
