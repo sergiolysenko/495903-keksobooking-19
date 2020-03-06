@@ -6,17 +6,18 @@
   var FLAT_PRICE = '1000';
   var HOUSE_PRICE = '5000';
   var PALACE_PRICE = '10000';
-  var houseType = document.getElementById('type');
-  var priceInput = document.getElementById('price');
+  var EMPTY_PHOTO_SRC = 'img/muffin-grey.svg';
+  var houseType = document.querySelector('#type');
+  var priceInput = document.querySelector('#price');
   var adForm = document.querySelector('.ad-form');
-  var addressInput = document.getElementById('address');
+  var addressInput = document.querySelector('#address');
   var title = document.querySelector('#title');
   var description = document.querySelector('#description');
   var featureCheckboxes = document.querySelectorAll('.feature__checkbox');
-  var timein = document.getElementById('timein');
-  var timeout = document.getElementById('timeout');
-  var roomNumberSelect = document.getElementById('room_number');
-  var capacity = document.getElementById('capacity');
+  var timein = document.querySelector('#timein');
+  var timeout = document.querySelector('#timeout');
+  var roomNumberSelect = document.querySelector('#room_number');
+  var capacity = document.querySelector('#capacity');
   var capacityOptions = capacity.querySelectorAll('option');
 
   var setPriceDefault = function () {
@@ -129,6 +130,18 @@
     window.backend.upload(new FormData(adForm), window.onSendPopup.actionsIfSuccess, window.onSendPopup.actionsIfError);
   });
 
+  var resetPreview = function (arr) {
+    arr.forEach(function (preview) {
+      if (preview.classList.contains('home-photo')) {
+        preview.remove();
+        window.avatar.previews.pop();
+        window.avatar.bookingChooser.value = '';
+      } else {
+        preview.src = EMPTY_PHOTO_SRC;
+      }
+    });
+  };
+
   window.form = {
     addressInputFill: addressInputFill,
     setPriceDefault: setPriceDefault,
@@ -142,6 +155,7 @@
     timeout: timeout,
     capacity: capacity,
     roomNumberSelect: roomNumberSelect,
-    setDefaultCapacity: setDefaultCapacity
+    setDefaultCapacity: setDefaultCapacity,
+    resetPreview: resetPreview
   };
 })();
