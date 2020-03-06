@@ -84,5 +84,6 @@
 
   window.pin = {
     create: createPins
+    ss
   };
 })();
