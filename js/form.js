@@ -134,6 +134,8 @@
     arr.forEach(function (preview) {
       if (preview.classList.contains('home-photo')) {
         preview.remove();
+        window.avatar.previews.pop();
+        window.avatar.bookingChooser.value = '';
       } else {
         preview.src = EMPTY_PHOTO_SRC;
       }

@@ -12,14 +12,14 @@
     newImg.classList.add('home-photo');
     bookingPreview.appendChild(newImg);
     var bookingPrevieImg = document.querySelector('.ad-form__photo img');
+
     return bookingPrevieImg;
   };
 
   var makePreviewer = function (fileChooser, preview) {
     previews.push(preview);
-    fileChooser.addEventListener('change', function () {
+    fileChooser.addEventListener('input', function () {
       var file = fileChooser.files[0];
-
       if (file) {
         var reader = new FileReader();
         reader.addEventListener('load', function () {
@@ -33,6 +33,7 @@
       }
     });
   };
+
   makePreviewer(userChooser, userPreview);
 
 
@@ -40,6 +41,7 @@
     previews: previews,
     makePreviewer: makePreviewer,
     makeNewImg: makeNewImg,
-    bookingChooser: bookingChooser
+    bookingChooser: bookingChooser,
+
   };
 })();
