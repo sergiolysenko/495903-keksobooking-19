@@ -83,8 +83,6 @@
   });
 
   window.pin = {
-    mapPins: mapPins,
     create: createPins
   };
-
 })();

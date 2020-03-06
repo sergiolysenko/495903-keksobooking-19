@@ -36,12 +36,10 @@
 
   makePreviewer(userChooser, userPreview);
 
-
   window.avatar = {
     previews: previews,
     makePreviewer: makePreviewer,
     makeNewImg: makeNewImg,
     bookingChooser: bookingChooser,
-
   };
 })();

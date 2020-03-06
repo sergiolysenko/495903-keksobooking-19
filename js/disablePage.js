@@ -13,7 +13,7 @@
       window.map.mainPin.addEventListener('mousedown', window.activatepage.onBigPinClick);
       window.map.mainPin.addEventListener('keydown', window.activatepage.onBigPinClick);
       window.util.deletePins();
-      window.form.adForm.classList.add('ad-form--disabled');
+      window.form.ad.classList.add('ad-form--disabled');
       window.form.addressInputFill(window.map.mainPin.style.left, window.map.mainPin.style.top);
       window.util.defaultSelect(window.map.filterSelects, 0);
       window.util.defaultCheckbox(window.map.filterCheckboxes);
@@ -29,7 +29,7 @@
   disable();
   window.disablePage = {
     disableElements: disableElements,
-    disable: disable
+    on: disable
   };
 })();
 
