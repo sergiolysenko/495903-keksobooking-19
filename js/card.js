@@ -30,15 +30,19 @@
       return domElem;
     };
 
+    var houseTypeToName = {
+      'flat': 'Квартира',
+      'bungalo': 'Бунгало',
+      'house': 'Дом',
+      'palace': 'Дворец'
+    };
+
     var translateHouseType = function (arrayElem) {
-      if (arrayElem === 'flat') {
-        var type = 'Квартира';
-      } else if (arrayElem === 'bungalo') {
-        type = 'Бунгало';
-      } else if (arrayElem === 'house') {
-        type = 'Дом';
-      } else if (arrayElem === 'palace') {
-        type = 'Дворец';
+      var type;
+      for (var key in houseTypeToName) {
+        if (arrayElem === key) {
+          type = houseTypeToName[key];
+        }
       }
       return type;
     };
@@ -85,11 +89,11 @@
 
     var createCardImages = function (imgArray, domNode, domElem) {
       if (imgArray) {
-        for (var j = 0; j < imgArray.length; j++) {
+        imgArray.forEach(function (img) {
           var cardImg = domElem.cloneNode(true);
-          cardImg.src = imgArray[j];
+          cardImg.src = img;
           domNode.appendChild(cardImg);
-        }
+        });
       } else {
         domNode.hidden = true;
       }

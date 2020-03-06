@@ -4,7 +4,8 @@
   var PIN_WIDTH = 40;
   var MAX_TOP = 130;
   var MAX_BOTTOM = 620;
-  var MAX_RIGHT = 1150;
+  var MAX_RIGHT = 1160;
+  var MAX_LEFT = -30;
   var MOVE_FROM_MAX = 10;
   var mapPinTemplate = document.querySelector('#pin')
     .content.querySelector('.map__pin');
@@ -64,8 +65,8 @@
       if (window.map.mainPin.offsetLeft > MAX_RIGHT) {
         window.map.mainPin.style.left = MAX_RIGHT - MOVE_FROM_MAX + 'px';
       }
-      if (window.map.mainPin.offsetLeft < 0) {
-        window.map.mainPin.style.left = MOVE_FROM_MAX + 'px';
+      if (window.map.mainPin.offsetLeft < MAX_LEFT) {
+        window.map.mainPin.style.left = MAX_LEFT + MOVE_FROM_MAX + 'px';
       }
 
       window.form.addressInputFill(window.map.mainPin.style.left, window.map.mainPin.style.top);

@@ -7,9 +7,7 @@
   var disable = function () {
     window.util.disableElem(disableElements);
     if (!document.querySelector('.map--faded')) {
-      if (document.querySelector('.map__card')) {
-        window.card.delete();
-      }
+      window.card.delete();
       window.map.mainBlock.classList.add('map--faded');
       window.map.mainPin.style = 'left: 570px; top: 375px;';
       window.map.mainPin.addEventListener('mousedown', window.activatepage.onBigPinClick);
@@ -25,6 +23,7 @@
       window.form.setDefaultCapacity();
       window.util.defaultSelect(window.form.houseType, 1, 'one');
       window.form.setPriceDefault();
+      window.form.resetPreview(window.avatar.previews);
     }
   };
   disable();
