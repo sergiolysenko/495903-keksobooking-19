@@ -1,15 +1,16 @@
 'use strict';
 (function () {
+  var MAIN_PIN_LEFT = 570;
+  var MAIN_PIN_TOP = 375;
   var disableElements = document.querySelectorAll('input, select, textarea, .ad-form__submit, .ad-form__reset');
   var inputsForReset = [window.form.timeout, window.form.timein, window.form.roomNumberSelect];
   var fieldsForClear = [window.form.priceInput, window.form.title, window.form.description];
-
   var disable = function () {
     window.util.disableElem(disableElements);
     if (!document.querySelector('.map--faded')) {
       window.card.delete();
       window.map.mainBlock.classList.add('map--faded');
-      window.map.mainPin.style = 'left: 570px; top: 375px;';
+      window.map.mainPin.style = 'left: ' + MAIN_PIN_LEFT + 'px; top: ' + MAIN_PIN_TOP + 'px;';
       window.map.mainPin.addEventListener('mousedown', window.activatepage.onBigPinClick);
       window.map.mainPin.addEventListener('keydown', window.activatepage.onBigPinClick);
       window.util.deletePins();
@@ -32,4 +33,3 @@
     on: disable
   };
 })();
-

@@ -4,6 +4,13 @@
   var cardTemplate = document.querySelector('#card')
       .content.querySelector('.map__card');
 
+  var houseTypeToName = {
+    flat: 'Квартира',
+    bungalo: 'Бунгало',
+    house: 'Дом',
+    palace: 'Дворец'
+  };
+  
   var createCard = function (adsArray) {
     var card = cardTemplate.cloneNode(true);
     var popupTitle = card.querySelector('.popup__title');
@@ -26,13 +33,6 @@
         domElem.hidden = true;
       }
       return domElem;
-    };
-
-    var houseTypeToName = {
-      'flat': 'Квартира',
-      'bungalo': 'Бунгало',
-      'house': 'Дом',
-      'palace': 'Дворец'
     };
 
     var translateHouseType = function (arrayElem) {

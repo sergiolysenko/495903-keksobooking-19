@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  var rightMouseButton = 1;
+  var RIGHT_BUTTON = 0;
   var addressInput = document.querySelector('#address');
 
   var enablePage = function (data) {
@@ -15,7 +15,7 @@
   };
 
   var onBigPinClick = function (evt) {
-    if (evt.which === rightMouseButton || evt.key === 'Enter') {
+    if (evt.button === RIGHT_BUTTON || evt.key === 'Enter') {
       window.backend.load(enablePage, window.onError);
       window.map.mainPin.removeEventListener('mousedown', onBigPinClick);
       window.map.mainPin.removeEventListener('keydown', onBigPinClick);

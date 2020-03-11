@@ -6,6 +6,8 @@
   var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
   var STATUS_OK = 200;
   var TIMEOUT = 10000;
+  var METHOD_POST = 'POST';
+  var METHOD_GET =  'GET';
 
   window.backend = {};
 
@@ -31,13 +33,13 @@
 
   window.backend.load = function (onSuccess, onError) {
     var xhr = getData(onSuccess, onError);
-    xhr.open('GET', URL_DOWNLOAD);
+    xhr.open(METHOD_GET, URL_DOWNLOAD);
     xhr.send();
   };
 
   window.backend.upload = function (data, onSuccess, onError) {
     var xhr = getData(onSuccess, onError);
-    xhr.open('POST', URL_UPLOAD);
+    xhr.open(METHOD_POST, URL_UPLOAD);
     xhr.send(data);
   };
 })();

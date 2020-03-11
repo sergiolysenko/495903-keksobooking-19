@@ -2,10 +2,10 @@
 (function () {
   var PIN_BIG_SIZE = 156;
   var PIN_SMALL_SIZE = 65;
-  var BUNGALO_PRICE = '0';
-  var FLAT_PRICE = '1000';
-  var HOUSE_PRICE = '5000';
-  var PALACE_PRICE = '10000';
+  var BUNGALO_PRICE = 0;
+  var FLAT_PRICE = 1000;
+  var HOUSE_PRICE = 5000;
+  var PALACE_PRICE = 10000;
   var EMPTY_PHOTO_SRC = 'img/muffin-grey.svg';
   var houseType = document.querySelector('#type');
   var priceInput = document.querySelector('#price');

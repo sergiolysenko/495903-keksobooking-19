@@ -1,5 +1,7 @@
 'use strict';
 (function () {
+  var FILTER_DEFAULT = 'any';
+  var KEY_ENTER = 'Enter';
   var filtersContainer = document.querySelector('.map__filters-container');
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
@@ -11,7 +13,6 @@
   var housingRooms = mapFilters.querySelector('#housing-rooms');
   var housingGuests = mapFilters.querySelector('#housing-guests');
   var housingFeatures = mapFilters.querySelector('#housing-features');
-  var FILTER_DEFAULT = 'any';
   var pinsData = [];
 
   var addOnPinClick = function (pin, adElem) {
@@ -23,7 +24,7 @@
       window.card.addClose();
     };
     var onPinEnterOpen = function (evt) {
-      if (evt.key === 'Enter') {
+      if (evt.key === KEY_ENTER) {
         openPin();
       }
     };
