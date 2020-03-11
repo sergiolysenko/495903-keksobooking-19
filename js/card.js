@@ -10,7 +10,6 @@
     house: 'Дом',
     palace: 'Дворец'
   };
-  
   var createCard = function (adsArray) {
     var card = cardTemplate.cloneNode(true);
     var popupTitle = card.querySelector('.popup__title');

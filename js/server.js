@@ -7,7 +7,7 @@
   var STATUS_OK = 200;
   var TIMEOUT = 10000;
   var METHOD_POST = 'POST';
-  var METHOD_GET =  'GET';
+  var METHOD_GET = 'GET';
 
   window.backend = {};
 
